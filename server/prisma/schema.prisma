@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  phone         String?        @unique
+  email         String?        @unique
+  passwordHash  String
+  createdAt     DateTime       @default(now())
+  spaces        SpaceMember[]
+  sessions      Session[]      @relation("SessionCreator")
+  orderItems    OrderItem[]
+  contributions Contribution[]
+  debtsOwed     Debt[]         @relation("DebtFrom")
+  debtsOwing    Debt[]         @relation("DebtTo")
+  notifications Notification[]
+}
+
+model Space {
+  id            String        @id @default(uuid())
+  name          String
+  description   String?
+  deliveryPoint String
+  latitude      Float?
+  longitude     Float?
+  createdBy     String
+  createdAt     DateTime      @default(now())
+  members       SpaceMember[]
+  sessions      Session[]
+}
+
+model SpaceMember {
+  id       String   @id @default(uuid())
+  userId   String
+  spaceId  String
+  role     String   @default("MEMBER")
+  joinedAt DateTime @default(now())
+  user     User     @relation(fields: [userId], references: [id])
+  space    Space    @relation(fields: [spaceId], references: [id])
+  @@unique([userId, spaceId])
+}
+
+model Session {
+  id              String         @id @default(uuid())
+  spaceId         String
+  createdBy       String
+  restaurantName  String
+  restaurantLink  String?
+  status          String         @default("OPEN")
+  durationMinutes Int            @default(15)
+  expiresAt       DateTime
+  minOrderValue   Int?
+  minParticipants Int?
+  shippingFee     Int            @default(0)
+  discountAmount  Int            @default(0)
+  discountPercent Float          @default(0)
+  splitMethod     String         @default("EQUAL")
+  externalOrderId String?
+  deliveryStatus  String         @default("PENDING")
+  paymentDeadline DateTime?
+  createdAt       DateTime       @default(now())
+  space           Space          @relation(fields: [spaceId], references: [id])
+  creator         User           @relation("SessionCreator", fields: [createdBy], references: [id])
+  orderItems      OrderItem[]
+  contributions   Contribution[]
+  debts           Debt[]
+  notifications   Notification[]
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  sessionId String
+  userId    String
+  itemName  String
+  quantity  Int      @default(1)
+  unitPrice Int
+  note      String?
+  createdAt DateTime @default(now())
+  session   Session  @relation(fields: [sessionId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Contribution {
+  id            String    @id @default(uuid())
+  sessionId     String
+  userId        String
+  amount        Int
+  status        String    @default("PENDING")
+  contributedAt DateTime?
+  createdAt     DateTime  @default(now())
+  session       Session   @relation(fields: [sessionId], references: [id])
+  user          User      @relation(fields: [userId], references: [id])
+  @@unique([sessionId, userId])
+}
+
+model Debt {
+  id         String    @id @default(uuid())
+  sessionId  String
+  fromUserId String
+  toUserId   String
+  amount     Int
+  status     String    @default("PENDING")
+  paidAt     DateTime?
+  createdAt  DateTime  @default(now())
+  session    Session   @relation(fields: [sessionId], references: [id])
+  fromUser   User      @relation("DebtFrom", fields: [fromUserId], references: [id])
+  toUser     User      @relation("DebtTo", fields: [toUserId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  sessionId String?
+  type      String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  session   Session? @relation(fields: [sessionId], references: [id])
+}
