@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Bối Cảnh & Vấn Đề Giải Quyết
+##  Bối Cảnh & Vấn Đề Giải Quyết
 
 * **Phí ship cao & Phụ phí đơn nhỏ:** Muốn đặt món giá trị nhỏ (25k-35k) nhưng bị đội giá do phí giao hàng và Small Order Fee.
 * **Bỏ lỡ mã giảm giá lớn:** Không đủ điều kiện dùng các voucher giảm sâu của app giao đồ ăn (giảm 40k/100k, 80k/200k) nếu đặt một mình.
@@ -14,7 +14,7 @@
 
 ---
 
-## ✨ Tính Năng Nổi Bật
+##  Tính Năng Nổi Bật
 
 ### 1. Không Gian Gom Đơn (Spaces)
 - **Địa điểm có sẵn (Preset Spaces):** Tích hợp sẵn 6 địa điểm học đường & KTX khu vực Chùa Láng, Hà Nội:
@@ -55,7 +55,7 @@
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
+##  Công Nghệ Sử Dụng (Tech Stack)
 
 | Thành phần | Công nghệ |
 | :--- | :--- |
@@ -66,7 +66,7 @@
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt & Chạy Local
+##  Hướng Dẫn Cài Đặt & Chạy Local
 
 ### Yêu Cầu Hệ Thống
 - [Node.js](https://nodejs.org/) phiên bản 18 trở lên
@@ -142,11 +142,11 @@ Sau khi chạy `npm run seed`, hệ thống đã có sẵn 4 tài khoản thử 
 
 Hệ thống đã được thiết kế sẵn sàng để deploy lên đám mây Render hoàn toàn miễn phí.
 
-👉 **Xem hướng dẫn chi tiết từng bước tại:** [**RENDER_DEPLOY.md**](./RENDER_DEPLOY.md)
+ **Xem hướng dẫn chi tiết từng bước tại:** [**RENDER_DEPLOY.md**](./RENDER_DEPLOY.md)
 
 ---
 
-## 📂 Cấu Trúc Thư Mục Dự Án
+##  Cấu Trúc Thư Mục Dự Án
 
 ```
 microbatch/
