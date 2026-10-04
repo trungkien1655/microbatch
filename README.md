@@ -125,7 +125,7 @@ npm run dev
 
 ---
 
-## 🔑 Tài Khoản Demo Sẵn Có (Mật khẩu: `123456`)
+##  Tài Khoản Demo Sẵn Có (Mật khẩu: `123456`)
 
 Sau khi chạy `npm run seed`, hệ thống đã có sẵn 4 tài khoản thử nghiệm:
 
@@ -138,7 +138,7 @@ Sau khi chạy `npm run seed`, hệ thống đã có sẵn 4 tài khoản thử 
 
 ---
 
-## ☁️ Hướng Dẫn Deploy Lên Render (24/7)
+##  Hướng Dẫn Deploy Lên Render (24/7)
 
 Hệ thống đã được thiết kế sẵn sàng để deploy lên đám mây Render hoàn toàn miễn phí.
 
